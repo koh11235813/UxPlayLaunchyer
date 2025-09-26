@@ -5,8 +5,8 @@
 - msys2
 - Bonjour SDK
 
-You may not have Bonjour SDK, you can download it from [Apple Developer](https://developer.apple.com/download/all/?q=bonjour%20sdk)
-may have to developer registration your Apple Account
+You may not have Bonjour SDK, you can download it from [Apple Developer](https://developer.apple.com/download/all/?q=bonjour%20sdk).
+May have to developer registration your Apple Account
 
 ## usage 
 ```sh
