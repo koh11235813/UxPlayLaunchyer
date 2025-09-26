@@ -10,6 +10,8 @@ obj/
 *.Designer.cs
 *.db
 .vs/
+.source.md
+
 # Rider / VSCode
 .idea/
 .vscode/
