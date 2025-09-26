@@ -15,7 +15,7 @@ namespace UxplayLauncher;
 public partial class MainWindow : Window
 {
     private readonly UxplayProcess _proc = new();
-    private readonly UxplayBuildService _buildService = new();
+    // ランチャーUIからのビルドは無効化
     private readonly DependencyManager _dependencyManager = new();
     private AppSettings _settings = new();
     private bool _isBuilding = false;
@@ -50,31 +50,7 @@ public partial class MainWindow : Window
             StopBtn.IsEnabled = false;
         });
 
-        _buildService.BuildProgress += (_, progress) => Dispatcher.Invoke(() =>
-        {
-            BuildStatusText.Text = progress;
-            BuildStatusText.Foreground = progress.Contains("完了") ? System.Windows.Media.Brushes.Green :
-                                       progress.Contains("エラー") ? System.Windows.Media.Brushes.Red :
-                                       System.Windows.Media.Brushes.Orange;
-        });
-
-        _buildService.BuildCompleted += (_, success) => Dispatcher.Invoke(() =>
-        {
-            _isBuilding = false;
-            BuildBtn.IsEnabled = true;
-            UpdateBuildBtn.IsEnabled = true;
-            BuildBtn.Content = "UxPlay をビルド";
-            UpdateBuildBtn.Content = "最新版をビルド";
-            if (success)
-            {
-                CheckUxplayPath();
-                AppendLog("✅ UxPlay のビルドが完了しました");
-            }
-            else
-            {
-                AppendLog("❌ UxPlay のビルドに失敗しました");
-            }
-        });
+        // ビルド関連のフックは削除
     }
 
     private void CheckUxplayPath()
@@ -90,7 +66,7 @@ public partial class MainWindow : Window
             Environment.CurrentDirectory,
             exeDir,
             // 発行規定パス候補
-            Path.Combine(Environment.CurrentDirectory, "UxplayLauncher", "UxplayLauncher", "bin", "Release", "net8.0-windows", "win-x64", "publish")
+            Path.Combine(Environment.CurrentDirectory, "publish")
         };
 
         foreach (var dir in candidateDirs)
@@ -100,14 +76,12 @@ public partial class MainWindow : Window
             if (File.Exists(path))
             {
                 UxplayPathBox.Text = path;
-                BuildStatusText.Text = $"UxPlay が見つかりました: {path}";
-                BuildStatusText.Foreground = System.Windows.Media.Brushes.Green;
+                StatusText.Text = "UxPlay が見つかりました";
                 return;
             }
         }
 
-        BuildStatusText.Text = "UxPlay が見つかりません - ビルドが必要です";
-        BuildStatusText.Foreground = System.Windows.Media.Brushes.Orange;
+        StatusText.Text = "UxPlay が見つかりません。『参照』から指定してください";
     }
 
     private void BrowseUxplay_Click(object sender, RoutedEventArgs e)
@@ -168,17 +142,18 @@ public partial class MainWindow : Window
 
     private async void StartBtn_Click(object sender, RoutedEventArgs e)
     {
-        // 自動ビルドが有効で、uxplay.exeが見つからない場合はビルドを実行
-        if (AutoBuildCheck.IsChecked == true && !File.Exists(UxplayPathBox.Text))
+        // uxplay.exe が未設定/不存在なら、参照ダイアログで指定を促す
+        if (!File.Exists(UxplayPathBox.Text))
         {
-            AppendLog("🔨 自動ビルドを開始します...");
-            await BuildUxplayAsync();
-
-            // ビルド後に再度パスをチェック
+            var res = MessageBox.Show("uxplay.exe が見つかりません。参照して指定しますか？", "Uxplay Launcher",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (res == MessageBoxResult.Yes)
+            {
+                BrowseUxplay_Click(sender, e);
+            }
             if (!File.Exists(UxplayPathBox.Text))
             {
-                MessageBox.Show("UxPlay のビルドに失敗しました。手動でパスを指定してください。",
-                    "Uxplay Launcher", MessageBoxButton.OK, MessageBoxImage.Warning);
+                StatusText.Text = "uxplay.exe を指定してください";
                 return;
             }
         }
@@ -270,37 +245,7 @@ public partial class MainWindow : Window
         StopBtn.IsEnabled = false;
     }
 
-    private async void BuildBtn_Click(object sender, RoutedEventArgs e)
-    {
-        if (_isBuilding) return;
-        await BuildUxplayAsync(UpdateToLatestCheck.IsChecked == true);
-    }
-
-    private async void UpdateBuildBtn_Click(object sender, RoutedEventArgs e)
-    {
-        if (_isBuilding) return;
-        await BuildUxplayAsync(true); // 常に最新版でビルド
-    }
-
-    private async Task BuildUxplayAsync(bool updateToLatest = false)
-    {
-        if (_isBuilding) return;
-
-        _isBuilding = true;
-        BuildBtn.IsEnabled = false;
-        UpdateBuildBtn.IsEnabled = false;
-        BuildBtn.Content = "ビルド中...";
-        UpdateBuildBtn.Content = "ビルド中...";
-
-        try
-        {
-            await _buildService.BuildUxplayAsync(updateToLatest);
-        }
-        catch (Exception ex)
-        {
-            AppendLog($"❌ ビルドエラー: {ex.Message}");
-        }
-    }
+    // ビルド系ハンドラは削除
 
     private void ClearLog_Click(object sender, RoutedEventArgs e)
     {

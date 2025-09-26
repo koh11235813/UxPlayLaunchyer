@@ -26,8 +26,8 @@
     <Page Remove="scripts\**" />
   </ItemGroup>
 
-  <!-- ビルド前に UxPlay を MSYS2 上でビルド（スクリプトが見つかった場合のみ） -->
-  <Target Name="BuildUxplay" BeforeTargets="Build">
+  <!-- ビルド: ランチャーの通常ビルドでは UxPlay ビルドを実行しない（publish でのみ実行） -->
+  <Target Name="BuildUxplay" BeforeTargets="Publish">
     <PropertyGroup>
       <_InvokePs>..\scripts\invoke-msys2-build.ps1</_InvokePs>
     </PropertyGroup>

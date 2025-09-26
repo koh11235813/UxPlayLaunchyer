@@ -15,18 +15,6 @@
         <!-- 左側の設定パネル -->
         <ScrollViewer Grid.Row="0" Grid.Column="0" VerticalScrollBarVisibility="Auto" Margin="0,0,20,0">
             <StackPanel>
-                <!-- ビルドセクション -->
-                <GroupBox Header="UxPlay ビルド" Margin="0,0,0,15">
-                    <StackPanel Margin="10">
-                        <CheckBox x:Name="AutoBuildCheck" Content="自動ビルドを有効にする" Margin="0,0,0,5" IsChecked="True"/>
-                        <CheckBox x:Name="UpdateToLatestCheck" Content="最新版に更新してビルド" Margin="0,0,0,10" IsChecked="True"/>
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <Button x:Name="BuildBtn" Content="UxPlay をビルド" Height="40" FontSize="14" Click="BuildBtn_Click" Margin="0,0,10,0"/>
-                            <Button x:Name="UpdateBuildBtn" Content="最新版をビルド" Height="40" FontSize="14" Click="UpdateBuildBtn_Click"/>
-                        </StackPanel>
-                        <TextBlock x:Name="BuildStatusText" Text="ビルド準備完了" Foreground="Green" FontWeight="Bold"/>
-                    </StackPanel>
-                </GroupBox>
 
                 <!-- パス設定 -->
                 <GroupBox Header="パス設定" Margin="0,0,0,15">
