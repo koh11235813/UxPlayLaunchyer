@@ -108,11 +108,8 @@ public partial class MainWindow : Window
         if (s.EnableHls) a.Add("-hls");
         if (s.AsyncAudio) a.Add("-async");
         if (s.NoVSync) a.Add("-vsync no");
-        if (s.EnableDebug) a.Add("-d");
-        if (s.EnableVerbose) a.Add("-v");
-        if (s.EnableMirror) a.Add("-m");
-        if (s.EnableAirplay2) a.Add("-a2");
-        if (s.EnableRaop) a.Add("-r");
+        // UxPlay の --help に存在しない（独自に付けていた）オプションは付与しない
+        // -d は存在するが意味が異なるため、UI の「デバッグ」は GST_DEBUG に割り当てる
 
         // 音声設定
         if (s.AudioOff)
@@ -199,7 +196,7 @@ public partial class MainWindow : Window
             {"PATH", $@"C:\msys64\mingw64\bin;C:\msys64\usr\bin;{Environment.GetEnvironmentVariable("PATH")}"},
             
             // GStreamerの基本設定
-            {"GST_DEBUG", "2"},
+            {"GST_DEBUG", (_settings.EnableVerbose || _settings.EnableDebug) ? "3" : "2"},
             {"GST_DEBUG_NO_COLOR", "1"},
             
             // その他の必要な環境変数
