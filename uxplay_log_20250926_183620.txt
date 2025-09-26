@@ -1,0 +1,69 @@
+[18:33:38] 🔨 自動ビルドを開始します...
+[18:33:38] ❌ UxPlay のビルドに失敗しました
+[18:34:37] 📦 必要なDLLをコピーしています...
+[18:34:37] ⚠️ 一部のDLLのコピーに失敗しました
+[18:34:37] > uxplay.exe -s 1280x720 -fps 60 -as "directsoundsink" -al 0 -n "UxPlay-Windows" -vs "d3d11videosink fullscreen-toggle-mode=alt-enter"
+[18:34:37] UxPlay 1.72: An Open-Source AirPlay mirroring and audio-streaming server.
+[18:34:37] 0:00:00.177894300 43576    2c4a3493640 WARN             d3d11device gstd3d11device.cpp:1372:gst_d3d11_device_get_video_device_handle: D3D11 call failed: 0x80004002, No such interface supported
+[18:34:37] using system MAC address e8:9c:25:db:af:a4
+[18:34:37] Initialized server socket(s)
+[18:34:46] Accepted IPv6 client on socket 9396
+[18:34:46] Local : 2409:0251:27e0:e600:d49f:e21a:d330:54dd
+[18:34:46] Remote: 2409:0251:27e0:e600:6cbc:d90c:b10f:3bbf
+[18:34:46] Accepted IPv6 client on socket 9640
+[18:34:46] Local : 2409:0251:27e0:e600:7cd9:4258:7040:ab93
+[18:34:46] Remote: 2409:0251:27e0:e600:6cbc:d90c:b10f:3bbf
+[18:34:46] Connection closed for socket 9640
+[18:34:46] Connection closed for socket 9640
+[18:34:46] connection request from iPad (iPad8,3) with deviceID = 76:FC:AB:CA:A7:10
+[18:34:46] Client identified as User-Agent: AirPlay/890.79.1
+[18:34:47] raop_rtp_mirror starting mirroring
+[18:34:47] adjust timestamps by 0.016546 secs
+[18:34:47] Begin streaming to GStreamer video pipeline
+[18:34:54] raop_rtp_mirror->running is no longer true
+[18:34:54] (uxplay.exe:43576): GLib-ERROR **: 18:34:54.254: ../glib-2.84.4/glib/gmem.c:139: failed to allocate 1256 bytes
+[18:35:07] 📦 必要なDLLをコピーしています...
+[18:35:07] ⚠️ 一部のDLLのコピーに失敗しました
+[18:35:07] > uxplay.exe -s 1280x720 -fps 60 -as "directsoundsink" -al 0 -n "UxPlay-Windows" -vs "d3d11videosink fullscreen-toggle-mode=alt-enter"
+[18:35:07] UxPlay 1.72: An Open-Source AirPlay mirroring and audio-streaming server.
+[18:35:07] 0:00:00.161687900  2260    1f9082ab9f0 WARN             d3d11device gstd3d11device.cpp:1372:gst_d3d11_device_get_video_device_handle: D3D11 call failed: 0x80004002, No such interface supported
+[18:35:07] using system MAC address e8:9c:25:db:af:a4
+[18:35:07] Initialized server socket(s)
+[18:35:09] Accepted IPv6 client on socket 12576
+[18:35:09] Local : 2409:0251:27e0:e600:c937:b7dc:a57a:c5ca
+[18:35:09] Remote: 2409:0251:27e0:e600:6cbc:d90c:b10f:3bbf
+[18:35:09] connection request from iPad (iPad8,3) with deviceID = 76:FC:AB:CA:A7:10
+[18:35:09] Client identified as User-Agent: AirPlay/890.79.1
+[18:35:09] raop_rtp_mirror starting mirroring
+[18:35:10] Begin streaming to GStreamer video pipeline
+[18:35:11] raop_rtp_mirror->running is no longer true
+[18:35:16] Accepted IPv6 client on socket 7816
+[18:35:16] Local : 2409:0251:27e0:e600:c937:b7dc:a57a:c5ca
+[18:35:16] Remote: 2409:0251:27e0:e600:6cbc:d90c:b10f:3bbf
+[18:35:16] connection request from iPad (iPad8,3) with deviceID = 76:FC:AB:CA:A7:10
+[18:35:16] Client identified as User-Agent: AirPlay/890.79.1
+[18:35:16] raop_rtp_mirror starting mirroring
+[18:35:16] Begin streaming to GStreamer video pipeline
+[18:35:21] 0:00:14.292647400  2260    1f908456710 WARN            videodecoder gstvideodecoder.c:3674:gst_video_decoder_clip_and_push_buf:<d3d11h264dec1> Dropping frame due to QoS. start:0:00:05.296639516 deadline:0:00:05.336639516 earliest_time:0:00:05.339894609
+[18:35:31] ct=8 spf=480 usingScreen=1 isMedia=1  audioFormat=0x1000000
+[18:35:31] start audio connection, format AAC-ELD 44100/2
+[18:35:31] raop_rtp starting audio
+[18:35:32] Unhandled Client Request: POST /audioMode RTSP/1.0
+[18:35:37] 0:00:30.022856700  2260    1f908456710 WARN            videodecoder gstvideodecoder.c:3674:gst_video_decoder_clip_and_push_buf:<d3d11h264dec1> Dropping frame due to QoS. start:0:00:21.011898308 deadline:0:00:21.051898308 earliest_time:0:00:21.085498759
+[18:35:37] 0:00:30.022960000  2260    1f908456710 WARN            videodecoder gstvideodecoder.c:3674:gst_video_decoder_clip_and_push_buf:<d3d11h264dec1> Dropping frame due to QoS. start:0:00:21.028564975 deadline:0:00:21.068564975 earliest_time:0:00:21.085498759
+[18:35:37] 0:00:30.032351100  2260    1f908456710 WARN            videodecoder gstvideodecoder.c:3674:gst_video_decoder_clip_and_push_buf:<d3d11h264dec1> Dropping frame due to QoS. start:0:00:21.045231641 deadline:0:00:21.085231641 earliest_time:0:00:21.085498759
+[18:35:39] 0:00:32.120954600  2260    1f908456710 WARN            videodecoder gstvideodecoder.c:3674:gst_video_decoder_clip_and_push_buf:<d3d11h264dec1> Dropping frame due to QoS. start:0:00:23.129571808 deadline:0:00:23.169571808 earliest_time:0:00:23.180908792
+[18:35:41] 0:00:34.224096200  2260    1f908456710 WARN            videodecoder gstvideodecoder.c:3674:gst_video_decoder_clip_and_push_buf:<d3d11h264dec1> Dropping frame due to QoS. start:0:00:25.230495766 deadline:0:00:25.270495766 earliest_time:0:00:25.272074234
+[18:35:43] 0:00:35.792165500  2260    1f908456710 WARN            videodecoder gstvideodecoder.c:3674:gst_video_decoder_clip_and_push_buf:<d3d11h264dec1> Dropping frame due to QoS. start:0:00:26.797851766 deadline:0:00:26.837851766 earliest_time:0:00:26.838793634
+[18:35:43] 0:00:36.313108000  2260    1f908456710 WARN            videodecoder gstvideodecoder.c:3674:gst_video_decoder_clip_and_push_buf:<d3d11h264dec1> Dropping frame due to QoS. start:0:00:27.314738475 deadline:0:00:27.354738475 earliest_time:0:00:27.362825992
+[18:35:45] 0:00:38.418597200  2260    1f91f60cd30 WARN           audiobasesink gstaudiobasesink.c:1499:gst_audio_base_sink_skew_slaving:<directsoundsink0> correct clock skew -0:00:00.020619005 < -+0:00:00.020000000
+[18:35:46] 0:00:39.461050900  2260    1f908456710 WARN            videodecoder gstvideodecoder.c:3674:gst_video_decoder_clip_and_push_buf:<d3d11h264dec1> Dropping frame due to QoS. start:0:00:30.466189391 deadline:0:00:30.506189391 earliest_time:0:00:30.521472742
+[18:35:47] 0:00:39.993075900  2260    1f908456710 WARN            videodecoder gstvideodecoder.c:3674:gst_video_decoder_clip_and_push_buf:<d3d11h264dec1> Dropping frame due to QoS. start:0:00:30.991425641 deadline:0:00:31.031425641 earliest_time:0:00:31.038255692
+[18:35:50] 0:00:42.604921300  2260    1f908456710 WARN            videodecoder gstvideodecoder.c:3674:gst_video_decoder_clip_and_push_buf:<d3d11h264dec1> Dropping frame due to QoS. start:0:00:33.617606891 deadline:0:00:33.657606891 earliest_time:0:00:33.660688442
+[18:35:55] 0:00:47.582779400  2260    1f9082c9890 WARN                 GST_BUS gstbus.c:387:gst_bus_post:<bus16> queue overflows with 1024 messages. Application is too slow or is not handling messages. Please add a message handler, otherwise the queue will grow infinitely.
+[18:35:58] 0:00:50.997009200  2260    1f908456710 WARN            videodecoder gstvideodecoder.c:3674:gst_video_decoder_clip_and_push_buf:<d3d11h264dec1> Dropping frame due to QoS. start:0:00:42.004632058 deadline:0:00:42.044632058 earliest_time:0:00:42.045438859
+[18:35:59] 0:00:51.518085200  2260    1f91f60cd30 WARN           audiobasesink gstaudiobasesink.c:1802:gst_audio_base_sink_get_alignment:<directsoundsink0> Unexpected discontinuity in audio timestamps of +0:00:01.220226757, resyncing
+[18:35:59] 0:00:51.566022700  2260    1f908456710 WARN            videodecoder gstvideodecoder.c:3674:gst_video_decoder_clip_and_push_buf:<d3d11h264dec1> Dropping frame due to QoS. start:0:00:42.538199808 deadline:0:00:42.578199808 earliest_time:0:00:42.586987992
+[18:36:00] 0:00:52.672745000  2260    1f9082c9890 WARN                 GST_BUS gstbus.c:387:gst_bus_post:<bus16> queue overflows with 2048 messages. Application is too slow or is not handling messages. Please add a message handler, otherwise the queue will grow infinitely.
+[18:36:02] 0:00:55.200648800  2260    1f908456710 WARN            videodecoder gstvideodecoder.c:3674:gst_video_decoder_clip_and_push_buf:<d3d11h264dec1> Dropping frame due to QoS. start:0:00:46.206499016 deadline:0:00:46.246499016 earliest_time:0:00:46.252907467
+[18:36:04] 0:00:57.045883200  2260    1f9082c9890 WARN                 GST_BUS gstbus.c:387:gst_bus_post:<bus16> queue overflows with 3072 messages. Application is too slow or is not handling messages. Please add a message handler, otherwise the queue will grow infinitely.

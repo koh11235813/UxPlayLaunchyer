@@ -12,4 +12,15 @@ public class AppSettings
     public string? Password { get; set; }
     public int? BasePort { get; set; }
     public string? VideoSink { get; set; }
+
+    // 追加のフラグ
+    public bool EnableDebug { get; set; }
+    public bool EnableVerbose { get; set; }
+    public bool EnableMirror { get; set; }
+    public string? AudioSink { get; set; }
+    public int? AudioLatency { get; set; }
+    public string? Name { get; set; }
+    public bool EnableAirplay2 { get; set; }
+    public bool EnableRaop { get; set; }
+    public string? CustomArgs { get; set; }
 }

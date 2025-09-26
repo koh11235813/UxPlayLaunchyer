@@ -1,61 +1,147 @@
 ﻿<Window x:Class="UxplayLauncher.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Uxplay Launcher" Height="520" Width="780">
-    <Grid Margin="12">
-        <StackPanel Width="290" Margin="0,0,12,0">
-            <TextBlock Text="uxplay.exe パス" FontWeight="Bold"/>
-            <DockPanel>
-                <TextBox x:Name="UxplayPathBox" MinWidth="220" Text=""/>
-                <Button Content="参照" Margin="6,0,0,0" Click="BrowseUxplay_Click"/>
-            </DockPanel>
+        Title="Uxplay Launcher" Height="800" Width="1200" MinHeight="600" MinWidth="900">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-            <Separator Margin="0,10,0,10"/>
+        <!-- 左側の設定パネル -->
+        <ScrollViewer Grid.Row="0" Grid.Column="0" VerticalScrollBarVisibility="Auto" Margin="0,0,20,0">
+            <StackPanel>
+                <!-- ビルドセクション -->
+                <GroupBox Header="UxPlay ビルド" Margin="0,0,0,15">
+                    <StackPanel Margin="10">
+                        <CheckBox x:Name="AutoBuildCheck" Content="自動ビルドを有効にする" Margin="0,0,0,5" IsChecked="True"/>
+                        <CheckBox x:Name="UpdateToLatestCheck" Content="最新版に更新してビルド" Margin="0,0,0,10" IsChecked="True"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <Button x:Name="BuildBtn" Content="UxPlay をビルド" Height="40" FontSize="14" Click="BuildBtn_Click" Margin="0,0,10,0"/>
+                            <Button x:Name="UpdateBuildBtn" Content="最新版をビルド" Height="40" FontSize="14" Click="UpdateBuildBtn_Click"/>
+                        </StackPanel>
+                        <TextBlock x:Name="BuildStatusText" Text="ビルド準備完了" Foreground="Green" FontWeight="Bold"/>
+                    </StackPanel>
+                </GroupBox>
 
-            <TextBlock Text="解像度 (例: 1280x720)" FontWeight="Bold"/>
-            <DockPanel>
-                <ComboBox x:Name="ResolutionBox" MinWidth="220" IsEditable="True">
-                    <ComboBoxItem Content="1280x720" IsSelected="True"/>
-                    <ComboBoxItem Content="1920x1080"/>
-                    <ComboBoxItem Content="2560x1440"/>
-                </ComboBox>
-            </DockPanel>
+                <!-- パス設定 -->
+                <GroupBox Header="パス設定" Margin="0,0,0,15">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="uxplay.exe パス" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <DockPanel>
+                            <TextBox x:Name="UxplayPathBox" MinWidth="280" Height="30" FontSize="12"/>
+                            <Button Content="参照" Margin="8,0,0,0" Height="30" Click="BrowseUxplay_Click"/>
+                        </DockPanel>
+                    </StackPanel>
+                </GroupBox>
 
-            <TextBlock Text="FPS" FontWeight="Bold" Margin="0,8,0,0"/>
-            <ComboBox x:Name="FpsBox" MinWidth="120">
-                <ComboBoxItem Content="30" IsSelected="True"/>
-                <ComboBoxItem Content="60"/>
-            </ComboBox>
+                <!-- 基本設定 -->
+                <GroupBox Header="基本設定" Margin="0,0,0,15">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="解像度 (例: 1280x720)" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <ComboBox x:Name="ResolutionBox" MinWidth="280" Height="30" IsEditable="True">
+                            <ComboBoxItem Content="1280x720" IsSelected="True"/>
+                            <ComboBoxItem Content="1920x1080"/>
+                            <ComboBoxItem Content="2560x1440"/>
+                            <ComboBoxItem Content="3840x2160"/>
+                        </ComboBox>
 
-            <CheckBox x:Name="HlsCheck" Content="-hls (YouTube等のAirPlay動画向け)" Margin="0,8,0,0"/>
-            <CheckBox x:Name="AsyncAudioCheck" Content="-async (音質優先/遅延大)"/>
-            <CheckBox x:Name="NoVsyncCheck" Content="-vsync no (低遅延寄り)"/>
-            <CheckBox x:Name="AudioOffCheck" Content="音声OFF（-as 0）"/>
+                        <TextBlock Text="FPS" FontWeight="Bold" Margin="0,10,0,5"/>
+                        <ComboBox x:Name="FpsBox" MinWidth="120" Height="30">
+                            <ComboBoxItem Content="30" IsSelected="True"/>
+                            <ComboBoxItem Content="60"/>
+                        </ComboBox>
+                    </StackPanel>
+                </GroupBox>
 
-            <TextBlock Text="パスワード (-pw)" FontWeight="Bold" Margin="0,8,0,0"/>
-            <PasswordBox x:Name="PasswordBox"/>
+                <!-- オプション設定 -->
+                <GroupBox Header="オプション設定" Margin="0,0,0,15">
+                    <StackPanel Margin="10">
+                        <CheckBox x:Name="HlsCheck" Content="-hls (YouTube等のAirPlay動画向け)" Margin="0,5,0,5" FontSize="12"/>
+                        <CheckBox x:Name="AsyncAudioCheck" Content="-async (音質優先/遅延大)" Margin="0,5,0,5" FontSize="12"/>
+                        <CheckBox x:Name="NoVsyncCheck" Content="-vsync no (低遅延寄り)" Margin="0,5,0,5" FontSize="12"/>
+                        <CheckBox x:Name="AudioOffCheck" Content="音声OFF（-as 0）" Margin="0,5,0,5" FontSize="12"/>
+                        <CheckBox x:Name="EnableDebugCheck" Content="-d (デバッグモード)" Margin="0,5,0,5" FontSize="12"/>
+                        <CheckBox x:Name="EnableVerboseCheck" Content="-v (詳細ログ)" Margin="0,5,0,5" FontSize="12"/>
+                        <CheckBox x:Name="EnableMirrorCheck" Content="-m (ミラーリングモード)" Margin="0,5,0,5" FontSize="12"/>
+                        <CheckBox x:Name="EnableAirplay2Check" Content="-a2 (AirPlay 2対応)" Margin="0,5,0,5" FontSize="12"/>
+                        <CheckBox x:Name="EnableRaopCheck" Content="-r (RAOP対応)" Margin="0,5,0,5" FontSize="12"/>
+                    </StackPanel>
+                </GroupBox>
 
-            <TextBlock Text="基底ポート (-p)" FontWeight="Bold" Margin="0,8,0,0"/>
-            <TextBox x:Name="BasePortBox" MinWidth="120"/>
+                <!-- セキュリティ設定 -->
+                <GroupBox Header="セキュリティ設定" Margin="0,0,0,15">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="パスワード (-pw)" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <PasswordBox x:Name="PasswordBox" MinWidth="280" Height="30"/>
 
-            <TextBlock Text="VideoSink (-vs) 例: d3d11videosink fullscreen-toggle-mode=alt-enter" FontWeight="Bold" TextWrapping="Wrap" Margin="0,8,0,0"/>
-            <TextBox x:Name="VideoSinkBox" MinWidth="220" Text="d3d11videosink fullscreen-toggle-mode=alt-enter"/>
+                        <TextBlock Text="基底ポート (-p)" FontWeight="Bold" Margin="0,10,0,5"/>
+                        <TextBox x:Name="BasePortBox" MinWidth="120" Height="30"/>
 
-            <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
-                <Button x:Name="StartBtn" Content="起動" Width="100" Click="StartBtn_Click"/>
-                <Button x:Name="StopBtn" Content="停止" Width="100" Margin="8,0,0,0" Click="StopBtn_Click"/>
+                        <TextBlock Text="デバイス名 (-n)" FontWeight="Bold" Margin="0,10,0,5"/>
+                        <TextBox x:Name="DeviceNameBox" MinWidth="280" Height="30" Text="UxPlay-Windows"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- 高度な設定 -->
+                <GroupBox Header="高度な設定" Margin="0,0,0,15">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="VideoSink (-vs)" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <TextBlock Text="例: d3d11videosink fullscreen-toggle-mode=alt-enter" FontSize="10" Foreground="Gray" Margin="0,0,0,5"/>
+                        <TextBox x:Name="VideoSinkBox" MinWidth="280" Height="30" Text="d3d11videosink fullscreen-toggle-mode=alt-enter"/>
+
+                        <TextBlock Text="AudioSink (-as)" FontWeight="Bold" Margin="0,10,0,5"/>
+                        <TextBox x:Name="AudioSinkBox" MinWidth="280" Height="30" Text="directsoundsink"/>
+
+                        <TextBlock Text="音声遅延 (-al)" FontWeight="Bold" Margin="0,10,0,5"/>
+                        <TextBox x:Name="AudioLatencyBox" MinWidth="120" Height="30" Text="0"/>
+
+                        <TextBlock Text="カスタム引数" FontWeight="Bold" Margin="0,10,0,5"/>
+                        <TextBox x:Name="CustomArgsBox" MinWidth="280" Height="30" Text="" 
+                                 ToolTip="追加のコマンドライン引数を入力してください"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- 制御ボタン -->
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                    <Button x:Name="StartBtn" Content="🚀 起動" Width="150" Height="50" FontSize="16" FontWeight="Bold" 
+                            Background="#4CAF50" Foreground="White" Click="StartBtn_Click" Margin="0,0,15,0"/>
+                    <Button x:Name="StopBtn" Content="⏹ 停止" Width="150" Height="50" FontSize="16" FontWeight="Bold" 
+                            Background="#F44336" Foreground="White" Click="StopBtn_Click"/>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </ScrollViewer>
 
-        <GroupBox Header="ログ" Grid.Column="1">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <TextBox x:Name="LogBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
-            </ScrollViewer>
+        <!-- 右側のログパネル -->
+        <GroupBox Header="ログ出力" Grid.Row="0" Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <TextBox x:Name="LogBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" 
+                             VerticalScrollBarVisibility="Auto" FontFamily="Consolas" FontSize="11" 
+                             Background="#1E1E1E" Foreground="#FFFFFF"/>
+                </ScrollViewer>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+                    <Button Content="クリア" Height="25" Width="60" Click="ClearLog_Click" Margin="0,0,10,0"/>
+                    <Button Content="ログ保存" Height="25" Width="80" Click="SaveLog_Click"/>
+                </StackPanel>
+            </Grid>
         </GroupBox>
 
-        <StatusBar Grid.Row="1" Grid.ColumnSpan="2">
+        <!-- ステータスバー -->
+        <StatusBar Grid.Row="1" Grid.ColumnSpan="2" Height="30">
             <StatusBarItem>
-                <TextBlock x:Name="StatusText" Text="停止中"/>
+                <TextBlock x:Name="StatusText" Text="停止中" FontWeight="Bold"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock x:Name="VersionText" Text="v1.0.0" FontSize="10"/>
             </StatusBarItem>
         </StatusBar>
     </Grid>
