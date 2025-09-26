@@ -1,0 +1,62 @@
+﻿<Window x:Class="UxplayLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Uxplay Launcher" Height="520" Width="780">
+    <Grid Margin="12">
+        <StackPanel Width="290" Margin="0,0,12,0">
+            <TextBlock Text="uxplay.exe パス" FontWeight="Bold"/>
+            <DockPanel>
+                <TextBox x:Name="UxplayPathBox" MinWidth="220" Text=""/>
+                <Button Content="参照" Margin="6,0,0,0" Click="BrowseUxplay_Click"/>
+            </DockPanel>
+
+            <Separator Margin="0,10,0,10"/>
+
+            <TextBlock Text="解像度 (例: 1280x720)" FontWeight="Bold"/>
+            <DockPanel>
+                <ComboBox x:Name="ResolutionBox" MinWidth="220" IsEditable="True">
+                    <ComboBoxItem Content="1280x720" IsSelected="True"/>
+                    <ComboBoxItem Content="1920x1080"/>
+                    <ComboBoxItem Content="2560x1440"/>
+                </ComboBox>
+            </DockPanel>
+
+            <TextBlock Text="FPS" FontWeight="Bold" Margin="0,8,0,0"/>
+            <ComboBox x:Name="FpsBox" MinWidth="120">
+                <ComboBoxItem Content="30" IsSelected="True"/>
+                <ComboBoxItem Content="60"/>
+            </ComboBox>
+
+            <CheckBox x:Name="HlsCheck" Content="-hls (YouTube等のAirPlay動画向け)" Margin="0,8,0,0"/>
+            <CheckBox x:Name="AsyncAudioCheck" Content="-async (音質優先/遅延大)"/>
+            <CheckBox x:Name="NoVsyncCheck" Content="-vsync no (低遅延寄り)"/>
+            <CheckBox x:Name="AudioOffCheck" Content="音声OFF（-as 0）"/>
+
+            <TextBlock Text="パスワード (-pw)" FontWeight="Bold" Margin="0,8,0,0"/>
+            <PasswordBox x:Name="PasswordBox"/>
+
+            <TextBlock Text="基底ポート (-p)" FontWeight="Bold" Margin="0,8,0,0"/>
+            <TextBox x:Name="BasePortBox" MinWidth="120"/>
+
+            <TextBlock Text="VideoSink (-vs) 例: d3d11videosink fullscreen-toggle-mode=alt-enter" FontWeight="Bold" TextWrapping="Wrap" Margin="0,8,0,0"/>
+            <TextBox x:Name="VideoSinkBox" MinWidth="220" Text="d3d11videosink fullscreen-toggle-mode=alt-enter"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                <Button x:Name="StartBtn" Content="起動" Width="100" Click="StartBtn_Click"/>
+                <Button x:Name="StopBtn" Content="停止" Width="100" Margin="8,0,0,0" Click="StopBtn_Click"/>
+            </StackPanel>
+        </StackPanel>
+
+        <GroupBox Header="ログ" Grid.Column="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <TextBox x:Name="LogBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
+            </ScrollViewer>
+        </GroupBox>
+
+        <StatusBar Grid.Row="1" Grid.ColumnSpan="2">
+            <StatusBarItem>
+                <TextBlock x:Name="StatusText" Text="停止中"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+	<RootNamespace>UxplayLauncher</RootNamespace>
+	<ApplicationManifest>app.manifest</ApplicationManifest>
+	<ApplicationIcon></ApplicationIcon>
+	<Platforms>x64</Platforms>
+	<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+	<!-- 自己完結配布用設定（CIで上書き可能） -->
+	<PublishSingleFile>true</PublishSingleFile>
+	<SelfContained>true</SelfContained>
+	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="scripts\**" />
+    <EmbeddedResource Remove="scripts\**" />
+    <None Remove="scripts\**" />
+    <Page Remove="scripts\**" />
+  </ItemGroup>
+	
+  <Target Name="BuildUxplay" BeforeTargets="Build">
+    <!-- MSYS2 経由で UxPlay をビルド（CI/ローカル共通） -->
+    <Exec Command="powershell -ExecutionPolicy Bypass -File $(SolutionDir)scripts/invoke-msys2-build.ps1" />
+  </Target>
+
+  <Target Name="CopyUxplay" AfterTargets="Publish">
+    <ItemGroup>
+      <_UxExe Include="$(SolutionDir)third_party/UxPlay/../uxplay.exe" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_UxExe)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

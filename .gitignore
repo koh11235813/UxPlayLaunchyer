@@ -1,0 +1,18 @@
+# Build artifacts
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+*.csproj.user
+*.pidb
+*.svclog
+*.Designer.cs
+*.db
+.vs/
+# Rider / VSCode
+.idea/
+.vscode/
+# Publish output
+publish/
+artifacts/
