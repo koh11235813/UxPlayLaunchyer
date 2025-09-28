@@ -36,7 +36,7 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
-          ./scripts/build-uxplay-mingw64.sh
+          ./UxplayLauncher/scripts/build-uxplay-mingw64.sh
 
       - name: Setup .NET 8
         uses: actions/setup-dotnet@v4
@@ -44,17 +44,17 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore
-        run: dotnet restore ./src/UxplayLauncher/UxplayLauncher.csproj
+        run: dotnet restore ./UxplayLauncher/UxplayLauncher/UxplayLauncher.csproj
 
       - name: Publish (self-contained)
         run: >-
-          dotnet publish ./src/UxplayLauncher/UxplayLauncher.csproj -c Release
+          dotnet publish ./UxplayLauncher/UxplayLauncher/UxplayLauncher.csproj -c Release
           -r win-x64 -p:PublishSingleFile=true -p:SelfContained=true
           -o ./artifacts/win-x64
 
       - name: Copy uxplay.exe into artifact
         run: |
-          copy uxplay.exe artifacts/win-x64/uxplay.exe
+          copy ./third_party/uxplay.exe artifacts/win-x64/uxplay.exe
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
