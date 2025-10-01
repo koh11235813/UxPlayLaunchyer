@@ -36,7 +36,7 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
-          ./UxplayLauncher/scripts/build-uxplay-mingw64.sh
+          ./UxplayLauncher/scripts/build-uxplay-github-actions.sh
 
       - name: Setup .NET 8
         uses: actions/setup-dotnet@v4
